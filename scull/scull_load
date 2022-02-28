@@ -1,5 +1,6 @@
 #!/bin/sh
 # $Id: scull_load,v 1.4 2004/11/03 06:19:49 rubini Exp $
+# Change 2/27/2022 - use modprobe instead of insmod per assignment instructions
 module="scull"
 device="scull"
 mode="664"
@@ -13,7 +14,7 @@ fi
 
 # invoke insmod with all arguments we got
 # and use a pathname, as insmod doesn't look in . by default
-insmod ./$module.ko $* || exit 1
+modprobe ./$module.ko $* || exit 1
 
 # retrieve major number
 major=$(awk "\$2==\"$module\" {print \$1}" /proc/devices)
